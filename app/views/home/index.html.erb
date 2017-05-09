@@ -1,0 +1,6 @@
+
+<% if current_user %>
+  <h1> Hey there, <%= link_to current_user.name, user_path %> </h1>
+<% else %>
+  <%=link_to "Login with Reddit", '/auth/reddit' %>
+<% end %>
