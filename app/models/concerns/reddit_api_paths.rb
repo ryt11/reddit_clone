@@ -4,6 +4,6 @@ module RedditApiPaths
   end
 
   def subscriptions
-    { path: '/subreddits/mine/subscriber', scope: 'mysubreddits'}
+    { path: '/subreddits/mine/subscriber', scope: 'mysubreddits' }
   end
 end

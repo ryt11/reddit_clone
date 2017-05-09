@@ -2,15 +2,14 @@ class RedditService
 
   include RedditApiPaths
 
-  attr_reader :connection
+  attr_reader :oauth_connection
 
   def initialize
-    @connection = Faraday.new('https://oauth.reddit.com')
+    @oauth_connection = Faraday.new('https://oauth.reddit.com')
   end
 
   def user_info(token)
     oauth_request(account_info[:path], account_info[:scope], token)
-
   end
 
   def subs(token)
@@ -20,7 +19,7 @@ class RedditService
   private
 
   def oauth_request(url_path, scope, token)
-    response = connection.get do |req|
+    response = oauth_connection.get do |req|
       req.url url_path
       req.headers['Authorization'] = "bearer #{token}"
       req.params['scope'] = scope
