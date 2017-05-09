@@ -9,22 +9,21 @@ class RedditService
   end
 
   def user_info(token)
-    oauth_request(account_info[:path], account_info[:scope], token)
+    oauth_request(account_info[:path], token)
   end
 
-  def subs(token)
-    oauth_request(subscriptions[:path], subscriptions[:scope], token)
+  def user_subscriptions(token)
+    oauth_request(subscriptions[:path], token)
   end
 
   private
 
-  def oauth_request(url_path, scope, token)
+  def oauth_request(url_path, token)
     response = oauth_connection.get do |req|
       req.url url_path
       req.headers['Authorization'] = "bearer #{token}"
-      req.params['scope'] = scope
     end
-    parse(response.body)
+     parse(response.body)
   end
 
   def parse(response)
